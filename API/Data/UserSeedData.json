@@ -1,0 +1,92 @@
+[
+    {
+        "UserName": "user1",      
+        "Email": "user1@gmail.com",
+        "Books": [
+            {
+                "Title": "Book 1",
+                "Author": "Author 1",
+                "IsRead": false,
+                "Description": "Description 1",
+                "Date": "2024-01-01",
+                "UserName": "user1"
+            },
+            {
+                "Title": "Book 2",
+                "Author": "Author 2",
+                "IsRead": true,
+                "Description": "Description 2",
+                "Date": "2024-01-01",
+                "UserName": "user1"
+            },
+            {
+                "Title": "Book 3",
+                "Author": "Author 3",
+                "IsRead": false,
+                "Description": "Description 3",
+                "Date": "2024-01-01",
+                "UserName": "user1"
+            }
+        ]
+    },
+    {
+        "UserName": "user2",
+        "Email": "user2@gmail.com",
+        "Books": [
+            {
+                "Title": "Book 4",
+                "Author": "Author 4",
+                "IsRead": false,
+                "Description": "Description 4",
+                "Date": "2024-01-01",
+                "UserName": "user2"
+            },
+            {
+                "Title": "Book 5",
+                "Author": "Author 5",
+                "IsRead": true,
+                "Description": "Description 5",
+                "Date": "2024-01-01",
+                "UserName": "user2"
+            },
+            {
+                "Title": "Book 6",
+                "Author": "Author 6",
+                "IsRead": false,
+                "Description": "Description 6",
+                "Date": "2024-01-01",
+                "UserName": "user2"
+            }
+        ]
+    },
+    {
+        "UserName": "user3",
+        "Email": "user3@gmail.com",
+        "Books": [
+            {
+                "Title": "Book 7",
+                "Author": "Author 7",
+                "IsRead": false,
+                "Description": "Description 7",
+                "Date": "2024-01-01",
+                 "UserName": "user3"
+            },
+            {
+                "Title": "Book 8",
+                "Author": "Author 8",
+                "IsRead": true,
+                "Description": "Description 8",
+                "Date": "2024-01-01",
+                 "UserName": "user3"
+            },
+            {
+                "Title": "Book 9",
+                "Author": "Author 9",
+                "IsRead": false,
+                "Description": "Description 9",
+                "Date": "2024-01-01",
+                 "UserName": "user3"
+            }
+        ]
+    }
+]

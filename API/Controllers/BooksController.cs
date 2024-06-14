@@ -1,5 +1,7 @@
 ﻿using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -7,10 +9,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace API.Controllers
 {
+    [Route("api/[controller]")]
     [Authorize]
     public class BooksController : BaseApiController
     {
@@ -26,7 +30,7 @@ namespace API.Controllers
             _mapper = mapper;
             _logger = logger;
         }
-
+/*
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookDto>>> GetBooks()
         {
@@ -44,6 +48,43 @@ namespace API.Controllers
             var books = await _bookRepository.GetBooksAsync(userNameClaim);
             return Ok(_mapper.Map<IEnumerable<BookDto>>(books));
         }
+*/
+
+        [HttpGet]
+        public async Task<ActionResult<PagedList<BookDto>>> GetBooks([FromQuery] UserParams userParams)
+        {
+            var userNameClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userNameClaim))
+            {
+                _logger.LogError("UserName claim not found.");
+                return Unauthorized("User is not authenticated");
+            }
+
+            _logger.LogInformation("Fetching books for user: {UserName}", userNameClaim);
+
+            var books = await _bookRepository.GetBooksAsync(userNameClaim, userParams);
+            Response.AddPaginationHeader(new PaginationHeader(books.CurrentPage, books.PageSize, books.TotalCount, books.TotalPages));
+            return Ok(_mapper.Map<IEnumerable<BookDto>>(books));
+        }
+
+        [HttpPost("ids")]
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetBooksByIds([FromBody] IdsDto idsDto)
+        {
+            var userNameClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userNameClaim))
+            {
+                _logger.LogError("UserName claim not found.");
+                return Unauthorized("User is not authenticated");
+            }
+
+            var books = await _bookRepository.GetBooksByIdsAsync(idsDto.Ids, userNameClaim);
+            if (books == null || !books.Any()) return NotFound();
+
+            return Ok(_mapper.Map<IEnumerable<BookDto>>(books));
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<BookDto>> AddBook(BookDto bookDto)
@@ -145,7 +186,7 @@ namespace API.Controllers
             if (await _bookRepository.SaveAllAsync())
             {
                 _logger.LogInformation("Book with ID {BookId} updated successfully for user: {UserName}", id, userNameClaim);
-                return Ok(_mapper.Map<BookDto>(book)); // Return updated book details
+                return NoContent();
             }
             return BadRequest("Failed to update book");
         }
@@ -168,9 +209,39 @@ namespace API.Controllers
             if (await _bookRepository.SaveAllAsync())
             {
                 _logger.LogInformation("Book with ID {BookId} deleted successfully for user: {UserName}", id, userNameClaim);
-                return Ok(new { message = "Deleted successfully" });
+                return NoContent();
             }
             return BadRequest("Failed to delete book");
         }
+
+        [HttpPatch("{id}/markAsRead")]
+        public async Task<IActionResult> MarkAsRead(int id)
+        {
+            var userNameClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userNameClaim))
+            {
+                _logger.LogError("UserName claim not found.");
+                return Unauthorized("User is not authenticated");
+            }
+
+            var book = await _bookRepository.GetBookAsync(id, userNameClaim);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            if (!book.IsRead)
+            {
+                book.IsRead = true;
+                book.Date = DateTime.UtcNow;
+                await _bookRepository.SaveAllAsync();
+            }
+
+            return NoContent();
+        }
+
+
+
     }
 }

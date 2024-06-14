@@ -1,0 +1,24 @@
+.btn-warning {
+  background-color: #ff9800;
+  border-color: #ff9800;
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background-color: #e68900;
+  border-color: #e68900;
+}
+
+.pagination-container {
+  margin-bottom: 20px;
+}
+
+.pagination-container button {
+  border-radius: 50%; 
+  padding: 10px 20px; 
+}
+
+.pagination-container span {
+  margin-left: 10px;
+  margin-right: 10px;
+}

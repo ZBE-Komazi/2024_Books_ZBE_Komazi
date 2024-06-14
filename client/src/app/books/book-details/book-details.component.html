@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div  class="card mb-4 book-detail-card">
+    <div class="card-body p-1 position-relative">
+      <img src="https://dreieck.com/en/wp-content/uploads/sites/2/2023/03/opened-book-06-adding-another-outline-850x638.png" alt="Book Icon" class="book-detail-image">
+      <div class="book-detail-content">
+        <div class="book-detail-titles">
+          <p><strong>Title:</strong></p>
+          <p><strong>Author:</strong></p>
+          <p><strong>Date:</strong></p>
+          <p><strong>Read:</strong></p>
+        </div>
+        <div class="book-detail-info">
+          <p>{{ book.title }}</p>
+          <p>{{ book.author }}</p>
+          <p>{{ book.date | date }}</p>
+          <p>{{ book.isRead ? 'Yes' : 'No' }}</p>
+        </div>
+      </div>
+      <div class="book-detail-description">
+        <p><strong>Description:</strong></p>
+        <p>{{ book.description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 d-flex justify-content-center">
+    <button class="btn btn-warning me-5" (click)="openEditBookModal()"><i class="fa fa-edit"></i> Edit</button>
+    <button class="btn btn-secondary ms-5" (click)="goBack()"><i class="fa fa-home"></i> Back</button>
+  </div>
+</div>

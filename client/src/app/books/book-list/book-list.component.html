@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>My Books</h2>
+    <ng-container *ngIf="accountService.currentUser$ | async">
+      <div class="d-flex">
+        <button class="btn btn-warning me-2" (click)="openCreateBookModal()">
+          <i class="fa fa-plus"></i> Add Book
+        </button>
+        <button class="btn" [ngClass]="{'btn-info': !isFilterActive, 'btn-warning': isFilterActive}" (click)="toggleFilter()">
+          <i class="fa fa-filter"></i>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let book of books">
+      <app-book-card 
+        [book]="book" 
+        (editBookEvent)="openEditBookModal($event)" 
+        (deleteBookEvent)="openDeleteBookModal($event)">
+      </app-book-card>
+    </div>
+  </div>
+  <div class="pagination-container d-flex justify-content-end mt-4 mb-4">
+    <button class="btn btn-primary rounded-circle me-2" [disabled]="pagedNumber === 1" (click)="pageChanged(pagedNumber - 1)">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+    <span class="align-self-center me-2">Page {{ pagedNumber }} of {{ pagination?.totalPages }}</span>
+    <button class="btn btn-primary rounded-circle" [disabled]="pagedNumber === pagination?.totalPages" (click)="pageChanged(pagedNumber + 1)">
+      <i class="fa fa-arrow-right"></i>
+    </button>
+  </div>
+</div>

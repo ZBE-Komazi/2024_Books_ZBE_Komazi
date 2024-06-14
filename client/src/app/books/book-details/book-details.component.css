@@ -1,0 +1,53 @@
+.book-detail-card {
+    border-width: 3px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .book-detail-image {
+    max-height: 150px;
+    display: block;
+    margin: 0 auto 15px;
+  }
+  
+  .book-detail-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .book-detail-titles, .book-detail-info {
+    flex: 1;
+  }
+  
+  .book-detail-titles p, .book-detail-info p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .book-detail-titles p {
+    text-align: left;
+  }
+  
+  .book-detail-info p {
+    text-align: right;
+  }
+  
+  .book-detail-description {
+    margin-top: 15px;
+  }
+  
+  .book-detail-description p {
+    margin: 0;
+    line-height: 1.5;
+    text-align: left;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button-group button {
+    margin: 0 80px; /* 160px spacing between buttons */
+  }
+  

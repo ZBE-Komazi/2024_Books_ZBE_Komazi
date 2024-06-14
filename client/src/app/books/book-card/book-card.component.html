@@ -1,0 +1,15 @@
+<div class="card mb-4" *ngIf="book">
+  <div class="card-body p-1 position-relative">
+    <h6 class="card-title text-center mb-1">{{ book.title }}</h6>
+    <p class="card-text text-muted text-center">{{ book.author }}</p>
+    <img src="https://dreieck.com/en/wp-content/uploads/sites/2/2023/03/opened-book-06-adding-another-outline-850x638.png" alt="Book Icon" class="img-fluid mx-auto d-block" style="max-height: 150px;">
+    <div class="position-absolute top-0 end-0 p-2">
+      <i class="fa fa-star" [ngClass]="{'text-warning': book.isRead, 'text-secondary': !book.isRead}" (click)="handleMarkAsRead()"></i>
+    </div>
+    <div class="text-center mt-2">
+      <button (click)="handleViewDetails()" class="btn btn-info me-2"><i class="fa fa-eye"></i> View</button>
+      <button (click)="handleEditBook()" class="btn btn-warning me-2"><i class="fa fa-edit"></i> Edit</button>
+      <button (click)="handleDeleteBook()" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+    </div>
+  </div>
+</div>

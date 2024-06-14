@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h4 class="modal-title">Create New Book</h4>
+    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()" style="position: absolute; right: 1rem;">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="createBook()" #bookForm="ngForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="model.title" name="title" required>
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" [(ngModel)]="model.author" name="author" required>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" [(ngModel)]="model.description" name="description" rows="3" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="isRead" class="form-label">Is Read</label>
+        <input type="checkbox" id="isRead" [(ngModel)]="model.isRead" name="isRead">
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+  

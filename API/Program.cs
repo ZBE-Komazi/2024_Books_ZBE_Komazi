@@ -1,9 +1,6 @@
-//2019098256 
-//ZBE Komazi
-//CSIP6833
-//13 June 2024
-//Exam Assignment
-
+// Initials: Z.B.E
+// Surname: Komazi
+// Student Number: 2019098256
 using API.Data;
 using API.Entities;
 using API.Extensions;
